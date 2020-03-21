@@ -61,13 +61,50 @@ class App extends React.Component{
     handleOnClickGetPosts(){
       this.setState({loadUsers : false});
     }
+  
+    getMaxId(users) {
+      let maxId = 0;
+  
+      users.forEach(user => {
+        if (user.id > maxId) {
+          maxId = user.id;
+        }
+      });
+  
+      return maxId;
+    }
 
+    updateUsersList(name, email, isGoldClient){
+      this.setState((previousState) => {
+        return {
+          users: [
+            ...previousState.users,
+            {
+              id: this.getMaxId(previousState.users) + 1,
+              name,
+              email,
+              isGoldClient
+            }
+          ]
+        }
+      });
+    }
+
+    deleteUserFromList(id){
+      this.setState((previousState) => {
+        return {
+          users: [
+            ...previousState.users.filter(u => u.id !== id)
+          ]
+        }
+      });
+    }
+    
     render() {
       return(
         <div className="App" style={{background : this.state.background, color : this.state.textColor}}>
           <div>
-            <h1>Add people:</h1>
-            <UserAddForm />
+            <UserAddForm updateUsersList={(name, email, isGoldClient) => this.updateUsersList(name, email, isGoldClient)}/>
           </div>
           
           <div>
@@ -86,7 +123,7 @@ class App extends React.Component{
           
           <div>
             {this.state.loadUsers
-            ? <UserList users={this.state.users} />
+            ? <UserList users={this.state.users} deleteUserFromList={(id) => this.deleteUserFromList(id)} />
             : <PostList posts={this.state.posts} />
             }
           </div>

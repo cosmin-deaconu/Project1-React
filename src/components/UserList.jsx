@@ -12,6 +12,10 @@ class UserList extends React.Component {
         console.log("UserItem did mount")
     }
 
+    deleteUserFromList(id){
+        this.props.deleteUserFromList(id);
+    }
+
     render() {
         return (
             <div>
@@ -20,10 +24,12 @@ class UserList extends React.Component {
                     this.props.users.map((user, index) => {
                         return (
                             <UserItem 
+                                id={ user.id }
                                 key={index}
                                 name={user.name}
                                 email={user.email}
                                 isGoldClient={user.isGoldClient}
+                                deleteUserFromList={(id) => this.deleteUserFromList(id)}
                             />
                         );
                     })

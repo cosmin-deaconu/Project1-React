@@ -1,8 +1,17 @@
 import React from 'react'
 
-function UserItem(props) {
-    const {name, email, isGoldClient } = props;
-    
+class UserItem extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
+
+  handleOnDeleteUser(id){
+    this.props.deleteUserFromList(id);
+  }
+
+  render(){
+    const {id, name, email, isGoldClient } = this.props;
     return (
       <div>
           <h2>name: {name}</h2>
@@ -12,8 +21,10 @@ function UserItem(props) {
               ? <p>Client Gold</p> 
               : null
           }
+          <input type="submit" value="Delete User" onClick={() => this.handleOnDeleteUser(id)}></input>
       </div>  
     );
+  }
 }
 
 export default UserItem;
