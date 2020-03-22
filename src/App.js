@@ -14,14 +14,6 @@ export const StyledDiv = styled.div`
   text-align: center;
 `;
 
-export const RStyledDiv = styled.div`
-  float: right;
-  width: 60%;
-  padding: 10px;
-  margin: auto;
-  text-align: center;
-`;
-
 class App extends React.Component{
     constructor() {
       super();
