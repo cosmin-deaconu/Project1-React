@@ -3,6 +3,24 @@ import './App.css'
 import UserAddForm from './components/UserAddForm'
 import UserList from './components/UserList';
 import PostList from './components/PostList';
+import styled from 'styled-components';
+
+export const StyledDiv = styled.div`
+  float: left;
+  width: 30%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+`;
+
+export const RStyledDiv = styled.div`
+  float: right;
+  width: 60%;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+`;
 
 class App extends React.Component{
     constructor() {
@@ -103,12 +121,10 @@ class App extends React.Component{
     render() {
       return(
         <div className="App" style={{background : this.state.background, color : this.state.textColor}}>
-          <div>
-            <UserAddForm updateUsersList={(name, email, isGoldClient) => this.updateUsersList(name, email, isGoldClient)}/>
-          </div>
-          
-          <div>
-            <h2>Get Data</h2>
+         <StyledDiv>
+           <UserAddForm updateUsersList={(name, email, isGoldClient) => this.updateUsersList(name, email, isGoldClient)}/>
+
+           <h2>Get Data</h2>
             <input
               type="submit" 
               value="Get Posts"
@@ -119,24 +135,20 @@ class App extends React.Component{
               value="Get Users"
               onClick={() => this.handleOnClickGetUsers()}
             />
-          </div>
-          
-          <div>
+
+            <h2>Change color</h2>
+            <label>Background color:</label>
+            <input type="color" onChange={(event) => this.handleBackgroundChange(event)}/>
+            <label>Text color:</label>
+            <input type="color" onChange={(event) => this.handleTextColorChange(event)}/>
+         </StyledDiv>
+
+         <RStyledDiv>
             {this.state.loadUsers
             ? <UserList users={this.state.users} deleteUserFromList={(id) => this.deleteUserFromList(id)} />
             : <PostList posts={this.state.posts} />
             }
-          </div>
-
-          <div>
-          <h2>Change color</h2>
-            <label>Background color:</label>
-            <input type="color" onChange={(event) => this.handleBackgroundChange(event)}/>
-          </div>
-          <div>
-            <label>Text color:</label>
-            <input type="color" onChange={(event) => this.handleTextColorChange(event)}/>
-          </div>       
+         </RStyledDiv>
         </div>
       );
     }

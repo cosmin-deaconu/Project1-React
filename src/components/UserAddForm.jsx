@@ -35,9 +35,6 @@ class UserAddForm extends React.Component{
         
         if(this.handleValidation()){
             this.props.updateUsersList(name, email, isGoldClient);
-            alert("Form submitted");
-        }else{
-            alert("Form has errors.")
         }
     }
 
@@ -71,7 +68,7 @@ class UserAddForm extends React.Component{
             }
        }  
 
-       this.setState({errors: errors});
+       this.setState({ errors });
        return formIsValid;
    }
 
