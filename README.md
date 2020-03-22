@@ -1,1 +1,1 @@
-# CursReact
+# Proiect 1 React
