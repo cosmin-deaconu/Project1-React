@@ -6,9 +6,9 @@ import PostList from './components/PostList';
 import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
-  float: left;
-  width: 30%;
-  border: 3px solid #73AD21;
+  float: ${props => props.float ? `${props.float}` : 'left'};;
+  width: ${props => props.width ? `${props.width}%` : '30%'};
+  border: ${props => props.border ? `${props.border}px solid #73AD21` : '0px solid #73AD21'};
   padding: 10px;
   margin: auto;
   text-align: center;
@@ -121,7 +121,7 @@ class App extends React.Component{
     render() {
       return(
         <div className="App" style={{background : this.state.background, color : this.state.textColor}}>
-         <StyledDiv>
+         <StyledDiv border = {3}>
            <UserAddForm updateUsersList={(name, email, isGoldClient) => this.updateUsersList(name, email, isGoldClient)}/>
 
            <h2>Get Data</h2>
@@ -143,12 +143,12 @@ class App extends React.Component{
             <input type="color" onChange={(event) => this.handleTextColorChange(event)}/>
          </StyledDiv>
 
-         <RStyledDiv>
+         <StyledDiv float = {"right"} width = {60}>
             {this.state.loadUsers
             ? <UserList users={this.state.users} deleteUserFromList={(id) => this.deleteUserFromList(id)} />
             : <PostList posts={this.state.posts} />
             }
-         </RStyledDiv>
+         </StyledDiv>
         </div>
       );
     }
